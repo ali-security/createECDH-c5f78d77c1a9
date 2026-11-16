@@ -109,3 +109,5 @@ var i = 0
 while (++i < 20) {
   run(i)
 }
+
+require('./test/invalid-public-key')
