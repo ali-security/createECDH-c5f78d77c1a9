@@ -1,0 +1,22 @@
+name: seal-build
+on:
+  workflow_dispatch:
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '8'
+      - name: Pack
+        run: |
+          mkdir -p dist
+          npm pack
+          mv create-ecdh-*.tgz dist/
+          tar tzvf dist/*.tgz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: create-ecdh-tgz
+          path: dist/*.tgz
